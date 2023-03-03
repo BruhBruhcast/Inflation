@@ -24,5 +24,16 @@ addLayer("p", {
     hotkeys: [
         {key: "p", description: "P: Reset for prestige points", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
+    upgrades: {
+	11: {
+	    name: "Start your inflation",
+    	    description: "Boost your point gain based on your points",
+    	    cost: new Decimal(1),
+	    effect() {
+        	return player[this.layer].points.add(1).pow(0.5)
+    	    },
+            effectDisplay() { return "^^"+format(upgradeEffect(this.layer, this.id)) }, // Add formatting to the effect
+        },    
+    }
     layerShown(){return true}
 })
